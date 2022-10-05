@@ -1,0 +1,95 @@
+
+div.innovaphone-jsbadgeexample-panel {
+    position:absolute;
+    left:0px;
+    right:0px;
+    top:0px;
+    bottom:0px;
+    color:var(--innovaphone-jsbadgeexample-item-text);
+    font-size:14px;
+}
+
+div.innovaphone-jsbadgeexample-obj {
+    position:relative;
+    margin:10px;
+    padding:5px;
+    background-color:var(--innovaphone-jsbadgeexample-item);
+    color:var(--innovaphone-jsbadgeexample-item-text);
+    font-size:14px;
+}
+
+div.innovaphone-jsbadgeexample-header {
+    position:relative;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+div.innovaphone-jsbadgeexample-label {
+    position:relative;
+    margin:5px 10px;
+    color:var(--innovaphone-jsbadgeexample-c2);
+}
+
+div.innovaphone-jsbadgeexample-label2 {
+    position:relative;
+    width:100px;
+    margin:5px 10px;
+    font-size: 15px;
+    text-align: left;
+    color: var(--innovaphone-jsbadgeexample-item-text);
+}
+
+div.innovaphone-jsbadgeexample-value {
+    position:relative;
+    margin:5px 0px;
+    /*background-color:var(--innovaphone-jsbadgeexample-input);*/
+    color:var(--innovaphone-jsbadgeexample-input-text);
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+div.innovaphone-jsbadgeexample-appicon {
+    background-size: cover;
+    position: absolute;
+    height: 50px;
+    left: 0px;
+    top: 0px;
+    width: 50px;
+}
+
+div.innovaphone-jsbadgeexample-button {
+    position:absolute;
+    width:120px;
+    height:25px;
+    background-color:var(--innovaphone-jsbadgeexample-button);
+    color:var(--innovaphone-jsbadgeexample-button-text);
+    text-align:center;
+    cursor:pointer;
+}
+
+input.innovaphone-jsbadgeexample-input {
+    width:100%;
+    box-sizing:border-box;
+    border:none;
+    margin:5px 0px;
+    padding: 5px 10px;
+    background-color:var(--innovaphone-jsbadgeexample-input);
+    color:var(--innovaphone-jsbadgeexample-input-text);
+}
+
+div.innovaphone-jsbadgeexample-choice {
+    box-sizing: border-box;
+    position:relative;
+    width:120px;
+    height:30px;
+    text-align:center;
+    background-color:var(--innovaphone-jsbadgeexample-button-bg);
+    margin:10px;
+    padding: 5px;
+}
+
+div.innovaphone-jsbadgeexample-choice:hover {
+    background-color:var(--innovaphone-jsbadgeexample-highlight-bg);
+}
+
