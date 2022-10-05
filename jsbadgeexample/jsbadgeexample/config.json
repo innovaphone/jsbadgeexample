@@ -8,12 +8,5 @@
         "innovaphone-jsbadgeexample": {
             "presence": true
         }
-    },
-    "serviceApis": {
-        "innovaphone-jsbadgeexample": {
-            "com.innovaphone.provisioning": {
-                "title": "JSExampleProvider"
-            }
-        }
     }
 }
