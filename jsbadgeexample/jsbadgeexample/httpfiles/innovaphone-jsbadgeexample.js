@@ -33,19 +33,22 @@ innovaphone.jsbadgeexample = innovaphone.jsbadgeexample || function (start, args
     app.onmessage = app_message;
 
     function app_connected(domain, user, dn, appdomain) {
-        app.send({ api: "user", mt: "UserMessage" });
+        app.sendSrc({ api: "user", mt: "GetCount" }, function (obj) {
+            counter.addHTML("" + obj.count);
+        });
 
         that.add(new innovaphone.ui1.Div(null, null, "button")).addTranslation(texts, "countUp").addEvent("click", function () {
-            app.sendSrc({ mt: "IncrementCount" }, function (msg) {
-                counter.addHTML("" + msg.count);
+            app.sendSrc({ api: "user", mt: "IncrementCount" }, function (obj) {
+                counter.addHTML("" + obj.count);
             });
         });
     }
 
     function app_message(obj) {
-        if (obj.api == "user" && obj.mt == "UserMessageResult") {
+        if (obj.api === "user" && obj.mt === "UpdateCount") {
+            counter.addHTML("" + obj.count);
         }
     }
-}
+};
 
 innovaphone.jsbadgeexample.prototype = innovaphone.ui1.nodePrototype;
