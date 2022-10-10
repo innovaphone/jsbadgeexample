@@ -47,7 +47,8 @@ new PbxApi("PbxSignal").onconnected(function (conn) {
     log("PbxSignal: connected");
 
     // for each PBX API connection an own call array is maintained
-    connectionsPbxSignal.push({ ws: conn, calls: [] });
+    var calls = [];
+    connectionsPbxSignal.push({ ws: conn, calls: calls });
 
     // register to the PBX in order to acceppt incoming presence calls
     conn.send(JSON.stringify({ "api": "PbxSignal", "mt": "Register", "flags": "NO_MEDIA_CALL" }));
@@ -73,32 +74,13 @@ new PbxApi("PbxSignal").onconnected(function (conn) {
             connectionsPbxSignal.filter(function (v) { return v.ws === conn })[0].calls.push(obj.call);
 
             // send notification with badge count first time the user has connected
-            conn.send(JSON.stringify(
-                {
-                    "api": "PbxSignal",
-                    "mt": "Signaling",
-                    "call": obj.call,
-                    "sig": {
-                        "fty": [
-                            {
-                                "contact": "app:",
-                                "note": "#badge:" + count,
-                                "status": "open",
-                                "type": "presence_notify"
-                            }
-                        ],
-                        "type": "facility"
-                    },
-                    "src": "badge"
-                }
-            ));
+            updateBadge(conn, obj.call, count);
         }
 
         // handle incoming call release messages
         if (obj.mt === "Signaling" && obj.sig.type === "rel") {
             // remove callid from the array for calls for this connection
-            var calllist = connectionsPbxSignal.filter(function (v) { return v.ws === conn })[0].calls;
-            calllist.splice(calllist.indexOf(obj.call), 1);
+            calls.splice(calls.indexOf(obj.call), 1);
         }
     });
 

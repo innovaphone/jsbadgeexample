@@ -5,9 +5,12 @@ nbproject
 */jse
 */exe
 */web1
-*/arm-debug
 */doc
 */obj
 */build.txt
 */*/build.txt
 */*/label.txt
+*/bin
+*/arm-debug
+*/arm64-debug
+*/x86_64-debug
