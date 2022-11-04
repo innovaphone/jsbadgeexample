@@ -10,15 +10,17 @@ new JsonApi("user").onconnected(function (conn) {
             var obj = JSON.parse(msg);
             log(msg);
 
+            var pbxconnected = connectionsPbxSignal.length > 0;
+
             if (obj.mt === "UserMessage") {
                 conn.send(JSON.stringify({ api: "user", mt: "UserMessageResult", src: obj.src }));
             }
             if (obj.mt === "GetCount") {
-                conn.send(JSON.stringify({ api: "user", mt: "GetCountResult", count: count, src: obj.src }));
+                conn.send(JSON.stringify({ api: "user", mt: "GetCountResult", count: count, pbxconnected: pbxconnected, src: obj.src }));
             }
             if (obj.mt === "IncrementCount") {
                 count++;
-                conn.send(JSON.stringify({ api: "user", mt: "IncrementCountResult", count: count, src: obj.src }));
+                conn.send(JSON.stringify({ api: "user", mt: "IncrementCountResult", count: count, pbxconnected: pbxconnected, src: obj.src }));
 
                 log("Sending updates via Presence Signalling");
                 connectionsPbxSignal.forEach(function (connection) {
@@ -29,7 +31,7 @@ new JsonApi("user").onconnected(function (conn) {
 
                 log("Sending updates via WS");
                 connectionsUser.forEach(function (connection) {
-                    connection.send(JSON.stringify({ api: "user", mt: "UpdateCount", count: count }));
+                    connection.send(JSON.stringify({ api: "user", mt: "UpdateCount", count: count, pbxconnected: pbxconnected }));
                 });
             }
         });

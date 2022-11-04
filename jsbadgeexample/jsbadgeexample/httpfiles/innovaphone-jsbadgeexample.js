@@ -27,6 +27,7 @@ innovaphone.jsbadgeexample = innovaphone.jsbadgeexample || function (start, args
     start.onlangchanged.attach(function () { texts.activate(start.lang) });
 
     var counter = this.add(new innovaphone.ui1.Div("position:absolute; left:0px; width:100%; top:calc(50% - 50px); font-size:100px; text-align:center", "-"));
+    var status = this.add(new innovaphone.ui1.Div("position:absolute; left:0px; width:100%; top:calc(80% - 10px); font-size:20px; text-align:center", ""));
     var app = new innovaphone.appwebsocket.Connection(start.url, start.name);
     app.checkBuild = true;
     app.onconnected = app_connected;
@@ -34,20 +35,25 @@ innovaphone.jsbadgeexample = innovaphone.jsbadgeexample || function (start, args
 
     function app_connected(domain, user, dn, appdomain) {
         app.sendSrc({ api: "user", mt: "GetCount" }, function (obj) {
-            counter.addHTML("" + obj.count);
+            updateUI(obj);
         });
 
         that.add(new innovaphone.ui1.Div(null, null, "button")).addTranslation(texts, "countUp").addEvent("click", function () {
             app.sendSrc({ api: "user", mt: "IncrementCount" }, function (obj) {
-                counter.addHTML("" + obj.count);
+                updateUI(obj);
             });
         });
     }
 
     function app_message(obj) {
         if (obj.api === "user" && obj.mt === "UpdateCount") {
-            counter.addHTML("" + obj.count);
+            updateUI(obj);
         }
+    }
+
+    function updateUI(obj) {
+        counter.addHTML("" + obj.count);
+        status.addHTML(obj.pbxconnected ? "" : "Warning: WebSocket connection from PBX not established");
     }
 };
 
