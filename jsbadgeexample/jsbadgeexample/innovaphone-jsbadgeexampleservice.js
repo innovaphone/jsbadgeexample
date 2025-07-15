@@ -88,7 +88,12 @@ new PbxApi("PbxSignal").onconnected(function (conn) {
 
     conn.onclose(function () {
         log("PbxSignal: disconnected");
-        connectionsPbxSignal.splice(connectionsPbxSignal.indexOf(conn), 1);
+        for (var i = 0; i < connectionsPbxSignal.length; i++) {
+            if (connectionsPbxSignal[i].ws === conn) {
+                connectionsPbxSignal.splice(i, 1);
+                break;
+            }
+        }
     });
 });
 
